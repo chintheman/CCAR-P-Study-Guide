@@ -1,0 +1,881 @@
+/* Baseline diagnostic: 21 items, 3 per domain. Source of truth: baseline.json */
+window.CCARP_BASELINE = [
+ {
+  "id": "BL-D1-01",
+  "domain": "Solution Design & Architecture",
+  "type": "single",
+  "stem": "An HR helpdesk answers questions in four stable categories: payroll, leave, benefits and system access. Each category has its own policy and response format. One prompt carries all four policies, runs at 26,000 tokens, and increasingly answers leave questions with benefits policy. Which design fits best?",
+  "options": [
+   {
+    "key": "A",
+    "text": "Run four specialist agents on every question and have a fifth agent choose which answer to send."
+   },
+   {
+    "key": "B",
+    "text": "Give an agent the four policies as retrievable tools and let it decide which to consult for each question."
+   },
+   {
+    "key": "C",
+    "text": "Classify each question first, then send it to one of four specialised prompts that each carry only their own policy and format."
+   },
+   {
+    "key": "D",
+    "text": "Keep the single prompt and move to a larger model that separates the four policies more reliably."
+   }
+  ],
+  "correct": [
+   "C"
+  ],
+  "rationale": "Distinct, stable categories that each need different handling are the routing case. Separating them removes the cross-contamination and shrinks each prompt.",
+  "distractors": {
+   "A": "Running every specialist on every question multiplies cost to solve a routing problem.",
+   "B": "The categories are known in advance, so letting a model choose the path adds cost and variance.",
+   "D": "A larger model costs more on every request and leaves the policies competing in one prompt."
+  },
+  "objective": "Select appropriate architectural patterns (workflow, agentic, augmented LLM)",
+  "src": [
+   {
+    "t": "Anthropic, Building effective agents: routing",
+    "u": "https://www.anthropic.com/engineering/building-effective-agents",
+    "type": "doc"
+   }
+  ]
+ },
+ {
+  "id": "BL-D1-02",
+  "domain": "Solution Design & Architecture",
+  "type": "single",
+  "stem": "A data team is choosing where an autonomous agent adds the most value over a fixed workflow. Which task is the strongest candidate for an agent?",
+  "options": [
+   {
+    "key": "A",
+    "text": "Diagnosing why last night's data pipeline failed, across unfamiliar logs, where each finding decides what to check next."
+   },
+   {
+    "key": "B",
+    "text": "Extracting supplier name, invoice number and total from 5,000 invoices a day into a fixed schema."
+   },
+   {
+    "key": "C",
+    "text": "Translating 300 help-centre articles into five languages with a glossary check after each one."
+   },
+   {
+    "key": "D",
+    "text": "Sorting inbound support tickets into eight categories that have not changed in two years."
+   }
+  ],
+  "correct": [
+   "A"
+  ],
+  "rationale": "Agents fit when the path can't be known in advance and each step depends on what the last one found. The other three tasks have fixed, known steps.",
+  "distractors": {
+   "B": "Fixed extraction to a known schema is a single call or a short chain.",
+   "C": "A known sequence with a check at each step is a workflow, possibly with an evaluator loop.",
+   "D": "Stable categories are the routing or classification case."
+  },
+  "objective": "Select appropriate architectural patterns (workflow, agentic, augmented LLM)",
+  "src": [
+   {
+    "t": "Anthropic, Building effective agents: when to use agents",
+    "u": "https://www.anthropic.com/engineering/building-effective-agents",
+    "type": "doc"
+   }
+  ]
+ },
+ {
+  "id": "BL-D1-03",
+  "domain": "Solution Design & Architecture",
+  "type": "multi",
+  "stem": "A team proposes replacing a single-agent research assistant with a lead agent that delegates to five subagents. Which two costs should the architect weigh? (Select TWO.)",
+  "options": [
+   {
+    "key": "A",
+    "text": "Subagents cannot call tools, so all retrieval has to stay with the lead agent."
+   },
+   {
+    "key": "B",
+    "text": "Failures become harder to trace, because behaviour emerges from coordination between agents."
+   },
+   {
+    "key": "C",
+    "text": "Total token usage rises substantially, because each subagent runs its own context and tool calls."
+   },
+   {
+    "key": "D",
+    "text": "Every subagent must use the same model as the lead agent."
+   },
+   {
+    "key": "E",
+    "text": "Subagents must run one after another, so the design is always slower than a single agent."
+   }
+  ],
+  "correct": [
+   "B",
+   "C"
+  ],
+  "rationale": "Multi-agent systems buy breadth and parallelism at the price of much higher token use and harder debugging.",
+  "distractors": {
+   "A": "Subagents routinely use tools. That's how they explore in parallel.",
+   "D": "Subagents can run on different model tiers.",
+   "E": "Subagents can run in parallel, which is one of the main benefits."
+  },
+  "objective": "Evaluate trade-offs of multi-agent architectures",
+  "src": [
+   {
+    "t": "Anthropic, How we built our multi-agent research system",
+    "u": "https://www.anthropic.com/engineering/multi-agent-research-system",
+    "type": "doc"
+   }
+  ]
+ },
+ {
+  "id": "BL-D3-01",
+  "domain": "Integration",
+  "type": "single",
+  "stem": "An airline assistant answers 'Is my flight on time?' from a search index rebuilt every six hours. Passengers are told flights are on time after delays have been announced. What should the architect change?",
+  "options": [
+   {
+    "key": "A",
+    "text": "Add a reranker that prefers the most recently indexed status for each flight."
+   },
+   {
+    "key": "B",
+    "text": "Rebuild the index every ten minutes so that status changes reach it sooner."
+   },
+   {
+    "key": "C",
+    "text": "Tell passengers in every answer that status may be up to six hours old."
+   },
+   {
+    "key": "D",
+    "text": "Read flight status from the operations system through a tool call at request time, and keep the index for baggage and fare policy."
+   }
+  ],
+  "correct": [
+   "D"
+  ],
+  "rationale": "Flight status is live state. Read it from the system of record when asked, and keep retrieval for slow-changing documents.",
+  "distractors": {
+   "A": "Picking the least-stale snapshot is still a snapshot.",
+   "B": "A fresher snapshot shrinks the gap but never closes it.",
+   "C": "A disclaimer warns about the problem without fixing it."
+  },
+  "objective": "Choose retrieval vs live tool access for data freshness",
+  "src": [
+   {
+    "t": "Anthropic, Building effective agents: augmented LLM with tools",
+    "u": "https://www.anthropic.com/engineering/building-effective-agents",
+    "type": "doc"
+   }
+  ]
+ },
+ {
+  "id": "BL-D3-02",
+  "domain": "Integration",
+  "type": "single",
+  "stem": "Five internal AI clients need the same read access to the company CRM: a chat app, Claude Code, two agents and a Slack bot. Each team is currently writing its own CRM integration. Which approach fits?",
+  "options": [
+   {
+    "key": "A",
+    "text": "Export the CRM nightly and paste the relevant records into each client's prompt."
+   },
+   {
+    "key": "B",
+    "text": "Fine-tune a model on CRM data so each client can answer without calling the CRM."
+   },
+   {
+    "key": "C",
+    "text": "Keep five separate integrations, since each client has slightly different needs."
+   },
+   {
+    "key": "D",
+    "text": "Build one MCP server for the CRM that every client connects to, with authorisation enforced at the server."
+   }
+  ],
+  "correct": [
+   "D"
+  ],
+  "rationale": "One capability shared by several AI clients is what MCP is for. Build once, reuse everywhere, and enforce access in one place.",
+  "distractors": {
+   "A": "Nightly exports go stale and push data into prompts without access control.",
+   "B": "Fine-tuning bakes in a snapshot, can't respect permissions, and goes stale.",
+   "C": "Five integrations multiply the maintenance and the places access control can go wrong."
+  },
+  "objective": "Choose between MCP, direct API integration and agent handoff",
+  "src": [
+   {
+    "t": "Model Context Protocol: introduction",
+    "u": "https://modelcontextprotocol.io/introduction",
+    "type": "doc"
+   }
+  ]
+ },
+ {
+  "id": "BL-D3-03",
+  "domain": "Integration",
+  "type": "multi",
+  "stem": "An agent's address-validation API fails on 6% of calls at peak. The team added retries at the agent, the gateway and the client, and doubled the timeout. Peak latency has tripled and the API's error rate is climbing. Which two changes should the architect make? (Select TWO.)",
+  "options": [
+   {
+    "key": "A",
+    "text": "Double the number of agent workers so that the extra capacity absorbs the slower responses."
+   },
+   {
+    "key": "B",
+    "text": "Add a circuit breaker that fails fast to a degraded path, flagging addresses for later validation."
+   },
+   {
+    "key": "C",
+    "text": "Add a fourth retry layer inside the API client, closer to the source of the errors."
+   },
+   {
+    "key": "D",
+    "text": "Double the timeout again so that slow responses have time to complete."
+   },
+   {
+    "key": "E",
+    "text": "Retry at one layer only, with a capped retry budget and exponential backoff with jitter."
+   }
+  ],
+  "correct": [
+   "B",
+   "E"
+  ],
+  "rationale": "Stacked retries multiply load on a struggling service. A resilience fix limits retries and detects failure so it can fail fast.",
+  "distractors": {
+   "A": "More workers means more calls hitting a failing API.",
+   "C": "Another retry layer multiplies calls further.",
+   "D": "The team already raised the timeout and it made things worse. Doing it again repeats the failure."
+  },
+  "objective": "Design resilient integrations (retries, timeouts, circuit breakers)",
+  "src": [
+   {
+    "t": "INFERRED: standard reliability practice (retry budgets, backoff with jitter, circuit breakers)",
+    "type": "inferred"
+   }
+  ]
+ },
+ {
+  "id": "BL-D4-01",
+  "domain": "Evaluation, Testing & Optimization",
+  "type": "single",
+  "stem": "A team edited its prompt against 400 labelled cases for a month until the score stopped rising at 93%. It now plans to report 93% as the assistant's accuracy. What should the architect require?",
+  "options": [
+   {
+    "key": "A",
+    "text": "Add 400 more cases, tune again until the score plateaus, and report the new figure."
+   },
+   {
+    "key": "B",
+    "text": "Report 93% with a confidence interval attached, since 400 cases is a reasonable sample."
+   },
+   {
+    "key": "C",
+    "text": "Score the final prompt on a held-out set that played no part in tuning, and report that figure."
+   },
+   {
+    "key": "D",
+    "text": "Re-run the 400 cases at temperature zero and report the stable figure."
+   }
+  ],
+  "correct": [
+   "C"
+  ],
+  "rationale": "A prompt tuned against a set is fitted to that set. Only cases it has never seen measure real performance.",
+  "distractors": {
+   "A": "Tuning on a bigger set just moves the same bias to more cases.",
+   "B": "An interval on a contaminated score is still contaminated.",
+   "D": "Temperature doesn't remove the tuning bias."
+  },
+  "objective": "Design valid evaluation methodology",
+  "src": [
+   {
+    "t": "Claude docs: Develop test cases",
+    "u": "https://docs.claude.com/en/docs/test-and-evaluate/develop-tests",
+    "type": "doc"
+   }
+  ]
+ },
+ {
+  "id": "BL-D4-02",
+  "domain": "Evaluation, Testing & Optimization",
+  "type": "single",
+  "stem": "After a team swapped its embedding model, retrieval recall on the evaluation set fell from 91% to 74%. The judge's faithfulness score (answers stick to the retrieved passages) stayed flat, and answer correctness fell. Where does the evidence place the fault?",
+  "options": [
+   {
+    "key": "A",
+    "text": "In the judge: a flat faithfulness score while correctness falls shows the judge is broken."
+   },
+   {
+    "key": "B",
+    "text": "In the prompt: the model needs an instruction to answer only when confident."
+   },
+   {
+    "key": "C",
+    "text": "In retrieval: the right passages are no longer being found, and the model answers faithfully from the wrong ones."
+   },
+   {
+    "key": "D",
+    "text": "In generation: the model has started ignoring the passages it is given."
+   }
+  ],
+  "correct": [
+   "C"
+  ],
+  "rationale": "The fault sits in the layer whose signal moved. Recall fell, and faithfulness held, which clears generation.",
+  "distractors": {
+   "A": "The judge didn't change, and its reading is consistent with a retrieval fault.",
+   "B": "No instruction can make up for passages that were never retrieved.",
+   "D": "Flat faithfulness shows the model still sticks to what it's given."
+  },
+  "objective": "Diagnose quality regressions using layered evaluation signals",
+  "src": [
+   {
+    "t": "INFERRED: layer localisation from observability signals",
+    "type": "inferred"
+   }
+  ]
+ },
+ {
+  "id": "BL-D4-03",
+  "domain": "Evaluation, Testing & Optimization",
+  "type": "single",
+  "stem": "An A/B test compares two prompts on resolution rate, the declared outcome, over three weeks. After eight days resolution is flat, and an analyst proposes adding customer satisfaction and reporting whichever measure favours the new prompt. What should the architect require?",
+  "options": [
+   {
+    "key": "A",
+    "text": "Add satisfaction and report both, so that the decision rests on more information."
+   },
+   {
+    "key": "B",
+    "text": "Switch to satisfaction for the remaining days and compare the two halves of the run."
+   },
+   {
+    "key": "C",
+    "text": "Stop the test now, since flat results after eight days mean there is no difference."
+   },
+   {
+    "key": "D",
+    "text": "Keep the declared measure and decision rule, and run any new measure as a separate, pre-registered test."
+   }
+  ],
+  "correct": [
+   "D"
+  ],
+  "rationale": "A measure chosen after seeing the data is cherry-picking. The measure, decision rule and stopping rule are fixed before the run.",
+  "distractors": {
+   "A": "Adding a measure mid-run, then reporting whichever wins, biases the result.",
+   "B": "Changing the measure mid-run makes the comparison invalid.",
+   "C": "Stopping early breaks the pre-registered stopping rule."
+  },
+  "objective": "Design valid A/B tests and experiments",
+  "src": [
+   {
+    "t": "INFERRED: pre-registration in experimentation practice",
+    "type": "inferred"
+   }
+  ]
+ },
+ {
+  "id": "BL-D5-01",
+  "domain": "Governance, Safety & Risk Management",
+  "type": "single",
+  "stem": "A support agent reads customer tickets and has a close_account tool. In testing, a ticket containing hidden instructions caused the agent to close an account. Which control is most effective?",
+  "options": [
+   {
+    "key": "A",
+    "text": "Log every account closure for a weekly review by the support lead."
+   },
+   {
+    "key": "B",
+    "text": "Add a system prompt rule stating that ticket content is data and never an instruction."
+   },
+   {
+    "key": "C",
+    "text": "Run an injection classifier over tickets and drop any that are flagged."
+   },
+   {
+    "key": "D",
+    "text": "Require human approval for close_account, so no ticket content can trigger it on its own."
+   }
+  ],
+  "correct": [
+   "D"
+  ],
+  "rationale": "Untrusted content can't be reliably cleaned, so limit what it can trigger. Gate the high-impact action.",
+  "distractors": {
+   "A": "Reviewing afterwards can't undo a closed account.",
+   "B": "An instruction is the weakest control, and injections are written to override it.",
+   "C": "A classifier helps as a layer but misses novel attacks, which then reach the tool."
+  },
+  "objective": "Mitigate prompt injection and tool misuse",
+  "src": [
+   {
+    "t": "Claude docs: Mitigate jailbreaks and prompt injections",
+    "u": "https://docs.claude.com/en/docs/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks",
+    "type": "doc"
+   }
+  ]
+ },
+ {
+  "id": "BL-D5-02",
+  "domain": "Governance, Safety & Risk Management",
+  "type": "single",
+  "stem": "An insurer's assistant drafts claim decisions, including approvals, requests for documents and denials. The team proposes auto-sending any draft the model rates above 0.9 confidence and routing the rest to adjusters. What should the architect specify?",
+  "options": [
+   {
+    "key": "A",
+    "text": "Route by impact: denials always go to an adjuster, while routine approvals and document requests are sampled for review."
+   },
+   {
+    "key": "B",
+    "text": "Raise the auto-send threshold to 0.98 so fewer uncertain drafts reach customers."
+   },
+   {
+    "key": "C",
+    "text": "Have a second model check each draft and auto-send when both agree."
+   },
+   {
+    "key": "D",
+    "text": "Auto-send as proposed and audit a sample of sent decisions each month."
+   }
+  ],
+  "correct": [
+   "A"
+  ],
+  "rationale": "Human review is routed by what happens if the output is wrong, not by the model's confidence. A model can be confident and wrong.",
+  "distractors": {
+   "B": "Still confidence-based, so confident errors go straight out.",
+   "C": "Model agreement isn't human accountability, and correlated errors pass both.",
+   "D": "An audit after sending can't stop a wrongful denial."
+  },
+  "objective": "Design risk-stratified human oversight",
+  "src": [
+   {
+    "t": "INFERRED: risk-stratified human-in-the-loop (impact over confidence)",
+    "type": "inferred"
+   }
+  ]
+ },
+ {
+  "id": "BL-D5-03",
+  "domain": "Governance, Safety & Risk Management",
+  "type": "multi",
+  "stem": "An audit finds that an assistant's transcripts store customers' national ID numbers, with no deletion schedule. The model vendor has confirmed zero data retention on its side. Which two controls should be added? (Select TWO.)",
+  "options": [
+   {
+    "key": "A",
+    "text": "Cite the vendor's zero-retention commitment as the retention control for the transcripts."
+   },
+   {
+    "key": "B",
+    "text": "Encrypt the transcript store and keep transcripts indefinitely for quality analysis."
+   },
+   {
+    "key": "C",
+    "text": "Set a retention period on the transcripts, enforced by automated deletion with evidence of each run."
+   },
+   {
+    "key": "D",
+    "text": "Mask ID numbers in the application layer before text is sent to the model and before it is logged."
+   },
+   {
+    "key": "E",
+    "text": "Instruct the model never to repeat an ID number back to the customer."
+   }
+  ],
+  "correct": [
+   "C",
+   "D"
+  ],
+  "rationale": "Remove sensitive data where it enters, in your own code, and give your own stores your own retention control with evidence.",
+  "distractors": {
+   "A": "The vendor's promise covers the vendor, not your transcripts.",
+   "B": "Encryption doesn't limit how long the data is kept.",
+   "E": "The ID has already been sent and logged by the time the model answers."
+  },
+  "objective": "Implement data protection and retention controls",
+  "src": [
+   {
+    "t": "INFERRED: data minimisation at ingress; own-store retention",
+    "type": "inferred"
+   }
+  ]
+ },
+ {
+  "id": "BL-D6-01",
+  "domain": "Stakeholder Communication & Lifecycle Management",
+  "type": "single",
+  "stem": "The CFO asks for a one-page briefing on a proposed Claude-based claims assistant before a budget meeting. Which framing fits this reader?",
+  "options": [
+   {
+    "key": "A",
+    "text": "The feature roadmap, release scope and dependencies for the next two quarters."
+   },
+   {
+    "key": "B",
+    "text": "Total cost including model usage and human review, expected savings against today's baseline, and the payback period."
+   },
+   {
+    "key": "C",
+    "text": "The model alternatives evaluated, the retrieval design and the component diagram."
+   },
+   {
+    "key": "D",
+    "text": "The threat model, data flows across trust boundaries and the control mappings."
+   }
+  ],
+  "correct": [
+   "B"
+  ],
+  "rationale": "Frame by audience. A CFO decides spend, so give full cost, savings against a baseline, and payback.",
+  "distractors": {
+   "A": "That's the product view.",
+   "C": "That's the engineering view.",
+   "D": "That's the security view."
+  },
+  "objective": "Communicate architecture decisions to different stakeholders",
+  "src": [
+   {
+    "t": "INFERRED: audience-based framing (no vendor documentation exists for this domain)",
+    "type": "inferred"
+   }
+  ]
+ },
+ {
+  "id": "BL-D6-02",
+  "domain": "Stakeholder Communication & Lifecycle Management",
+  "type": "single",
+  "stem": "An architect must present one recommendation to a steering committee made up of the COO, the head of legal and the CISO, each with different concerns. How should the document be structured?",
+  "options": [
+   {
+    "key": "A",
+    "text": "Lead with the security analysis, since the CISO's concerns are the most likely to block approval."
+   },
+   {
+    "key": "B",
+    "text": "Lead with the full technical design, so every member sees the whole system before the recommendation."
+   },
+   {
+    "key": "C",
+    "text": "State the recommendation first, then give each stakeholder a section addressing their main concern."
+   },
+   {
+    "key": "D",
+    "text": "Present one continuous narrative, without separating concerns by stakeholder."
+   }
+  ],
+  "correct": [
+   "C"
+  ],
+  "rationale": "Mixed audiences get the decision first, then a section each reader can go straight to.",
+  "distractors": {
+   "A": "Leading with one member's concerns sidelines the others.",
+   "B": "Technical detail first loses the non-technical members.",
+   "D": "The stem says each member cares about different things, and one narrative ignores that."
+  },
+  "objective": "Communicate architecture decisions to different stakeholders",
+  "src": [
+   {
+    "t": "INFERRED: audience-based framing (no vendor documentation exists for this domain)",
+    "type": "inferred"
+   }
+  ]
+ },
+ {
+  "id": "BL-D6-03",
+  "domain": "Stakeholder Communication & Lifecycle Management",
+  "type": "multi",
+  "stem": "An integrator hands a Claude-based triage system to the client's operations team, and the integrator's staff leave in four weeks. Which two measures best ensure the client can run it alone? (Select TWO.)",
+  "options": [
+   {
+    "key": "A",
+    "text": "The integrator keeps administrator access to production for a year, in case of issues."
+   },
+   {
+    "key": "B",
+    "text": "The integrator records walkthrough videos of every dashboard for the client to watch."
+   },
+   {
+    "key": "C",
+    "text": "The client owns the evaluation set and runs the regression suite itself before every prompt change."
+   },
+   {
+    "key": "D",
+    "text": "The client's engineers run the next two incident drills while the integrator observes and intervenes only for safety."
+   },
+   {
+    "key": "E",
+    "text": "The integrator delivers a 150-page architecture document covering every component."
+   }
+  ],
+  "correct": [
+   "C",
+   "D"
+  ],
+  "rationale": "Handover succeeds when the client does the work and owns the controls. Supervised practice and client-owned evaluation both build that.",
+  "distractors": {
+   "A": "Retained access keeps the dependency the handover is meant to end.",
+   "B": "Watching isn't doing.",
+   "E": "Documentation is necessary but doesn't build the ability to operate."
+  },
+  "objective": "Plan handover and operational transition",
+  "src": [
+   {
+    "t": "INFERRED: capability transfer in handover (no vendor documentation exists for this domain)",
+    "type": "inferred"
+   }
+  ]
+ },
+ {
+  "id": "BL-D2-01",
+  "domain": "Claude Models, Prompting & Context Engineering",
+  "type": "single",
+  "stem": "A prompt clearly specifies an output format: a title, three bullets of 15 words or fewer, and a one-line recommendation. About 20% of outputs still drift, with long bullets or a missing recommendation. The instruction has been reviewed and is correct. Which change fits?",
+  "options": [
+   {
+    "key": "A",
+    "text": "Move to the largest model tier so that instructions are followed more reliably."
+   },
+   {
+    "key": "B",
+    "text": "Repeat the format rule in capitals at the start and end of the prompt."
+   },
+   {
+    "key": "C",
+    "text": "Add three or four varied examples of correctly formatted outputs to the prompt."
+   },
+   {
+    "key": "D",
+    "text": "Split the task into a pipeline of draft, reformat and validate calls."
+   }
+  ],
+  "correct": [
+   "C"
+  ],
+  "rationale": "When a correct instruction still produces inconsistent output, the gap is demonstration. A few examples anchor the format.",
+  "distractors": {
+   "A": "A bigger model costs more on every request.",
+   "B": "Repeating the rule louder gives the model nothing new.",
+   "D": "A three-call pipeline triples cost for what examples usually fix."
+  },
+  "objective": "Apply few-shot prompting",
+  "src": [
+   {
+    "t": "Claude docs: Use examples (multishot prompting)",
+    "u": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/multishot-prompting",
+    "type": "doc"
+   }
+  ]
+ },
+ {
+  "id": "BL-D2-02",
+  "domain": "Claude Models, Prompting & Context Engineering",
+  "type": "single",
+  "stem": "A team turned on prompt caching, but the hit rate is near zero. The system prompt begins with 'Current time: {timestamp}', followed by 8,000 tokens of fixed policy, and then the user's question. Which change fixes this?",
+  "options": [
+   {
+    "key": "A",
+    "text": "Move the timestamp after the fixed policy, so the cached prefix is identical on every request."
+   },
+   {
+    "key": "B",
+    "text": "Switch caching off, since a changing prompt cannot benefit from it."
+   },
+   {
+    "key": "C",
+    "text": "Shorten the fixed policy so that it fits within a smaller cache block."
+   },
+   {
+    "key": "D",
+    "text": "Put the user's question first so the model reads the task before the policy."
+   }
+  ],
+  "correct": [
+   "A"
+  ],
+  "rationale": "The cache matches an exact prefix. Stable content goes first, and anything that changes goes after it.",
+  "distractors": {
+   "B": "The prompt can be reordered to benefit, so switching off gives up the saving.",
+   "C": "Length isn't the problem. The changing timestamp at the top breaks every match.",
+   "D": "Variable content first means nothing after it can be cached."
+  },
+  "objective": "Optimise cost and latency with prompt caching",
+  "src": [
+   {
+    "t": "Claude docs: Prompt caching",
+    "u": "https://docs.claude.com/en/docs/build-with-claude/prompt-caching",
+    "type": "doc"
+   }
+  ]
+ },
+ {
+  "id": "BL-D2-03",
+  "domain": "Claude Models, Prompting & Context Engineering",
+  "type": "single",
+  "stem": "A product lead prompts: 'Our checkout redesign clearly caused the conversion drop, right? Summarise the evidence.' The summary confirms the redesign and never mentions a payment-provider outage in the same week. What is the best prompt fix?",
+  "options": [
+   {
+    "key": "A",
+    "text": "Ask which factors explain the conversion change, naming the redesign, the payment outage and seasonality, ranked by strength of evidence."
+   },
+   {
+    "key": "B",
+    "text": "Add examples of summaries that clearly confirm the user's hypothesis."
+   },
+   {
+    "key": "C",
+    "text": "Add 'Be objective and unbiased' to the system prompt."
+   },
+   {
+    "key": "D",
+    "text": "Switch to a larger model, which is less likely to agree with the user."
+   }
+  ],
+  "correct": [
+   "A"
+  ],
+  "rationale": "A leading question gets agreement. A neutral comparison against named factors brings the counter-evidence out.",
+  "distractors": {
+   "B": "This reinforces the bias.",
+   "C": "An instruction to be objective doesn't remove the leading framing.",
+   "D": "Model size doesn't fix a prompt that asks for confirmation."
+  },
+  "objective": "Mitigate bias and sycophancy in prompt design",
+  "src": [
+   {
+    "t": "Anthropic research: Towards understanding sycophancy in language models",
+    "u": "https://www.anthropic.com/research/towards-understanding-sycophancy-in-language-models",
+    "type": "doc"
+   }
+  ]
+ },
+ {
+  "id": "BL-D7-01",
+  "domain": "Developer Productivity & Operational Enablement",
+  "type": "single",
+  "stem": "A 20-person team wants every engineer to get the same approved Jira MCP server automatically when they clone the repository. Where should it be configured?",
+  "options": [
+   {
+    "key": "A",
+    "text": "In each engineer's local scope, which is kept out of version control."
+   },
+   {
+    "key": "B",
+    "text": "In each engineer's user scope, following a setup page on the wiki."
+   },
+   {
+    "key": "C",
+    "text": "In managed scope, locked so no engineer can change it."
+   },
+   {
+    "key": "D",
+    "text": "In project scope, committed to the repository."
+   }
+  ],
+  "correct": [
+   "D"
+  ],
+  "rationale": "Project scope reaches everyone who clones the repo, through git. That's the shared-team-setup scope.",
+  "distractors": {
+   "A": "Local scope is personal and not committed, so nothing is shared.",
+   "B": "User scope is personal and manual, so it drifts between engineers.",
+   "C": "Managed is for rules that must not be overridden. A shared tool doesn't need locking."
+  },
+  "objective": "Configure Claude Code for team productivity",
+  "src": [
+   {
+    "t": "Claude Code docs: Settings",
+    "u": "https://docs.claude.com/en/docs/claude-code/settings",
+    "type": "doc"
+   }
+  ]
+ },
+ {
+  "id": "BL-D7-02",
+  "domain": "Developer Productivity & Operational Enablement",
+  "type": "single",
+  "stem": "A platform team requires that Claude Code never modifies files under /infra, every time, for every engineer. Which mechanism meets that requirement?",
+  "options": [
+   {
+    "key": "A",
+    "text": "A custom slash command that engineers run to check whether /infra was touched."
+   },
+   {
+    "key": "B",
+    "text": "A deny rule for /infra in managed settings, or a PreToolUse hook that blocks edits to that path."
+   },
+   {
+    "key": "C",
+    "text": "A line in the project CLAUDE.md stating that /infra must never be edited."
+   },
+   {
+    "key": "D",
+    "text": "A reminder in the pull request template asking reviewers to check for /infra changes."
+   }
+  ],
+  "correct": [
+   "B"
+  ],
+  "rationale": "'Every time' needs deterministic enforcement. Permission rules and hooks run in the harness, so the model can't skip them.",
+  "distractors": {
+   "A": "An optional command fails 'every time'.",
+   "C": "CLAUDE.md is guidance the model reads. It's probabilistic, not enforced.",
+   "D": "This catches changes after the fact, and only if someone remembers."
+  },
+  "objective": "Enforce team standards with Claude Code settings and hooks",
+  "src": [
+   {
+    "t": "Claude Code docs: Hooks",
+    "u": "https://docs.claude.com/en/docs/claude-code/hooks",
+    "type": "doc"
+   },
+   {
+    "t": "Claude Code docs: Settings",
+    "u": "https://docs.claude.com/en/docs/claude-code/settings",
+    "type": "doc"
+   }
+  ]
+ },
+ {
+  "id": "BL-D7-03",
+  "domain": "Developer Productivity & Operational Enablement",
+  "type": "single",
+  "stem": "A team wants Claude Code to run in CI on every pull request, summarising what changed and flagging risky edits. The runner also holds production deploy credentials. How should it be set up?",
+  "options": [
+   {
+    "key": "A",
+    "text": "Run it interactively, and have an engineer approve each prompt as pull requests arrive."
+   },
+   {
+    "key": "B",
+    "text": "Give it the deploy credentials too, so it can fix and redeploy what it flags."
+   },
+   {
+    "key": "C",
+    "text": "Run it headless, with an allow-list limited to reading the repository and posting a comment, and no access to the deploy credentials."
+   },
+   {
+    "key": "D",
+    "text": "Run it headless with all permission checks disabled, since no human is present to approve prompts."
+   }
+  ],
+  "correct": [
+   "C"
+  ],
+  "rationale": "Unattended automation gets least privilege: non-interactive mode, only the tools the task needs, and dangerous credentials out of reach.",
+  "distractors": {
+   "A": "This doesn't scale and defeats the point of CI.",
+   "B": "The task is review. Deploy access goes far beyond it.",
+   "D": "No checks plus deploy credentials gives an unattended agent production blast radius."
+  },
+  "objective": "Operationalise Claude Code in automation safely",
+  "src": [
+   {
+    "t": "Claude Code docs: GitHub Actions",
+    "u": "https://docs.claude.com/en/docs/claude-code/github-actions",
+    "type": "doc"
+   }
+  ]
+ }
+];
