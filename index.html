@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Free CCAR-P study guide: a 21-question baseline that maps your gaps, 103 domain drill questions with explanations, and a one-page exam card.">
+<title>CCAR-P Study Guide</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap">
+<style>
+:root{
+  --paper:#F5F4F0; --surface:#FFFFFF; --sunk:#EDECE7;
+  --ink:#15181B; --muted:#4A4F55; --faint:#7A8189;
+  --line:#E0DED7; --line-strong:#C6C3BA;
+  --accent:#3A5A8C; --accent-ink:#FFFFFF; --accent-soft:#E6ECF6;
+  --strong:#2E6A4E; --strong-soft:#E2EFE7;
+  --mid:#946612; --mid-soft:#F5ECD9;
+  --weak:#9B3A31; --weak-soft:#F6E4E1;
+  --sans:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,monospace;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#101214; --surface:#171A1D; --sunk:#1E2226;
+    --ink:#ECEAE4; --muted:#B2B7BD; --faint:#858C94;
+    --line:#292E33; --line-strong:#3A4148;
+    --accent:#8EABD8; --accent-ink:#0F1419; --accent-soft:#1A2433;
+    --strong:#7CC49B; --strong-soft:#13241B;
+    --mid:#D8A74A; --mid-soft:#2A2213;
+    --weak:#E28A7F; --weak-soft:#2C1A17;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#101214; --surface:#171A1D; --sunk:#1E2226;
+  --ink:#ECEAE4; --muted:#B2B7BD; --faint:#858C94;
+  --line:#292E33; --line-strong:#3A4148;
+  --accent:#8EABD8; --accent-ink:#0F1419; --accent-soft:#1A2433;
+  --strong:#7CC49B; --strong-soft:#13241B;
+  --mid:#D8A74A; --mid-soft:#2A2213;
+  --weak:#E28A7F; --weak-soft:#2C1A17;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-text-size-adjust:100%}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+a{color:var(--accent)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:1px solid var(--line)}
+.top-in{max-width:880px;margin:0 auto;padding-inline:16px;padding-block:10px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.brand{font-family:var(--serif);font-weight:700;font-size:18px;white-space:nowrap}
+.brand span{color:var(--accent)}
+nav{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
+nav button{border:1px solid transparent;background:none;padding:6px 11px;border-radius:6px;font-size:14px;color:var(--muted)}
+nav button[aria-current="page"]{background:var(--surface);border-color:var(--line-strong);color:var(--ink);font-weight:600}
+@media (max-width:600px){nav{order:3;width:100%;margin-left:0}.theme{margin-left:auto}}
+.theme{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:5px 9px;font-size:13px;color:var(--muted)}
+main{max-width:880px;margin:0 auto;padding-inline:16px;padding-block:26px 90px;display:grid;gap:22px}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--serif);font-size:clamp(26px,5vw,36px);line-height:1.12;margin:0;text-wrap:balance}
+h2{font-family:var(--serif);font-size:21px;line-height:1.2;margin:0;text-wrap:balance}
+h3{font-size:16px;margin:0}
+p{margin:0}
+.lede{color:var(--muted);max-width:65ch}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px}
+.stack{display:grid;gap:14px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:8px;align-content:start}
+.step .n{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.step p{color:var(--muted);font-size:14.5px}
+.btn{border:1px solid var(--line-strong);background:var(--surface);border-radius:7px;padding:9px 15px;font-weight:500;font-size:15px}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+.fact{background:var(--sunk);border-radius:8px;padding:10px 12px;display:grid;gap:1px}
+.fact b{font-family:var(--mono);font-size:20px}
+.fact span{font-size:12.5px;color:var(--faint)}
+.note{font-size:13.5px;color:var(--muted);border-left:3px solid var(--line-strong);padding:4px 0 4px 12px}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{text-align:left;padding:9px 10px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:500}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.band{display:inline-block;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:4px;white-space:nowrap}
+.band.strong{background:var(--strong-soft);color:var(--strong)}
+.band.mid{background:var(--mid-soft);color:var(--mid)}
+.band.weak{background:var(--weak-soft);color:var(--weak)}
+.q{display:grid;gap:16px}
+.qhead{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:10px}
+.qno{font-family:var(--mono);font-size:13px;font-weight:600}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);background:var(--sunk);padding:2px 7px;border-radius:4px}
+.stem{font-family:var(--serif);font-size:18px;line-height:1.55}
+.opts{display:grid;gap:9px}
+.opt{display:grid;grid-template-columns:auto auto 1fr;gap:11px;align-items:start;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:12px 14px;font-size:15px;line-height:1.5}
+.opt:hover{border-color:var(--line-strong)}
+.opt[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.opt .box{width:17px;height:17px;border:1.5px solid var(--line-strong);margin-top:2px;display:grid;place-items:center;font-size:11px}
+.opt .box.round{border-radius:50%}
+.opt[aria-pressed="true"] .box{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.opt .k{font-family:var(--mono);font-weight:600;font-size:13px;margin-top:1px}
+.opt.good{border-color:var(--strong);background:var(--strong-soft)}
+.opt.bad{border-color:var(--weak);background:var(--weak-soft)}
+.opt:disabled{cursor:default}
+.match{display:grid;gap:10px}
+.mrow{display:grid;grid-template-columns:1fr minmax(0,240px);gap:12px;align-items:center;border:1px solid var(--line);border-radius:8px;padding:12px 14px;font-size:14.5px}
+.mrow select{font:inherit;font-size:14px;padding:7px 8px;border:1px solid var(--line-strong);border-radius:6px;background:var(--surface);color:var(--ink);width:100%}
+.mrow.good{border-color:var(--strong)} .mrow.bad{border-color:var(--weak)}
+.mrow .want{grid-column:1/-1;font-size:13px;color:var(--weak)}
+@media (max-width:560px){.mrow{grid-template-columns:1fr}}
+.conf{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:14px;color:var(--muted);border-top:1px dashed var(--line-strong);padding-top:12px}
+.conf button{border:1px solid var(--line-strong);background:var(--surface);border-radius:6px;padding:5px 11px;font-size:13.5px}
+.conf button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.prog{height:4px;background:var(--sunk);border-radius:3px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--accent)}
+.verdict{font-weight:600}
+.verdict.ok{color:var(--strong)} .verdict.no{color:var(--weak)}
+.why{display:grid;gap:10px;background:var(--sunk);border-radius:8px;padding:14px}
+.why ul{margin:0;padding-left:18px;display:grid;gap:5px;font-size:14.5px;color:var(--muted)}
+.srcs{font-size:13px;color:var(--faint);display:grid;gap:3px}
+.srcs .inf{color:var(--mid)}
+.domgrid{display:grid;gap:10px}
+.dom{display:grid;grid-template-columns:1fr auto;gap:8px 14px;align-items:center;border:1px solid var(--line);background:var(--surface);border-radius:9px;padding:13px 15px;text-align:left}
+.dom:hover{border-color:var(--line-strong)}
+.dom .meta{font-size:13px;color:var(--faint);grid-column:1/-1;display:flex;gap:10px;flex-wrap:wrap}
+.dom .go{font-family:var(--mono);font-size:12.5px;color:var(--accent)}
+.bar{height:6px;background:var(--sunk);border-radius:3px;overflow:hidden;grid-column:1/-1}
+.bar i{display:block;height:100%}
+.card-sec{display:grid;gap:10px}
+.rule{border-left:3px solid var(--accent);background:var(--accent-soft);padding:10px 12px;border-radius:0 7px 7px 0;display:grid;gap:3px}
+.rule b{font-weight:600} .rule span{font-size:14px;color:var(--muted)}
+.card-sec ul,.card-sec ol{margin:0;padding-left:20px;display:grid;gap:6px}
+footer{max-width:880px;margin:0 auto;padding-inline:16px;padding-block:0 40px;color:var(--faint);font-size:12.5px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+
+
+</head>
+<body>
+<header class="top"><div class="top-in">
+  <div class="brand">CCAR-P <span>Study Guide</span></div>
+  <nav id="nav" aria-label="Sections">
+    <button data-view="home">Start</button>
+    <button data-view="baseline">Baseline</button>
+    <button data-view="drills">Domain drills</button>
+    <button data-view="card">Exam card</button>
+  </nav>
+  <button class="theme" id="themeBtn" type="button" aria-label="Toggle light or dark theme">Theme</button>
+</div></header>
+
+<main id="app"></main>
+
+<footer>By Chin Tuan Chuang, for the ClaudeSg community. Original practice material written against the public CCAR-P exam guide. Not affiliated with or endorsed by Anthropic, and not drawn from live exam content.</footer>
+
+<script src="data/baseline.js"></script>
+<script src="data/bank.js"></script>
+<script>
+(function(){
+"use strict";
+var BASE = window.CCARP_BASELINE || [], BANK = window.CCARP_BANK || [];
+var DOMS = [
+  {k:"Integration", s:"Integration", w:19},
+  {k:"Solution Design & Architecture", s:"Solution Design", w:17},
+  {k:"Evaluation, Testing & Optimization", s:"Evaluation & Optimization", w:16},
+  {k:"Governance, Safety & Risk Management", s:"Governance & Safety", w:14},
+  {k:"Stakeholder Communication & Lifecycle Management", s:"Stakeholder & Lifecycle", w:14},
+  {k:"Claude Models, Prompting & Context Engineering", s:"Models & Prompting", w:13},
+  {k:"Developer Productivity & Operational Enablement", s:"Dev Productivity", w:7}
+];
+var SHORT = {}; DOMS.forEach(function(d){SHORT[d.k]=d.s});
+var app = document.getElementById("app");
+
+/* storage: per-viewer convenience only */
+function get(k,d){try{var v=localStorage.getItem("ccarpsg_"+k);return v?JSON.parse(v):d}catch(e){return d}}
+function put(k,v){try{localStorage.setItem("ccarpsg_"+k,JSON.stringify(v))}catch(e){}}
+try{var th=localStorage.getItem("ccarpsg_theme");if(th)document.documentElement.setAttribute("data-theme",th)}catch(e){}
+document.getElementById("themeBtn").onclick=function(){
+  var r=document.documentElement,cur=r.getAttribute("data-theme");
+  var dark=cur?cur==="dark":matchMedia("(prefers-color-scheme: dark)").matches;
+  r.setAttribute("data-theme",dark?"light":"dark");
+  try{localStorage.setItem("ccarpsg_theme",dark?"light":"dark")}catch(e){}
+};
+
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+function need(it){return it.type==="multi"?it.correct.length:1}
+function isRight(it,ans){
+  if(!ans) return false;
+  if(it.type==="match") return it.prompts.every(function(p){return ans[p.id]===it.correct[p.id]});
+  return ans.slice().sort().join()===it.correct.slice().sort().join();
+}
+function answered(it,ans){
+  if(!ans) return false;
+  if(it.type==="match") return it.prompts.every(function(p){return !!ans[p.id]});
+  return ans.length===need(it);
+}
+function srcHTML(it){
+  var s=it.src||[]; if(!s.length) return "";
+  return '<div class="srcs"><b style="color:var(--muted)">Source</b>'+s.map(function(x){
+    if(x.type==="inferred") return '<div class="inf">INFERRED: '+esc(x.t.replace(/^INFERRED:\s*/,""))+'</div>';
+    if(!x.u) return '<div>'+esc(x.t)+'</div>';
+    return '<div><a href="'+esc(x.u)+'" target="_blank" rel="noopener">'+esc(x.t)+'</a></div>';
+  }).join("")+'</div>';
+}
+function setNav(v){Array.prototype.forEach.call(document.querySelectorAll("#nav button"),function(b){
+  if(b.getAttribute("data-view")===v) b.setAttribute("aria-current","page"); else b.removeAttribute("aria-current");});}
+Array.prototype.forEach.call(document.querySelectorAll("#nav button"),function(b){
+  b.onclick=function(){go(b.getAttribute("data-view"))};
+});
+function go(v,arg){setNav(v==="drill"?"drills":v);window.scrollTo(0,0);
+  ({home:home,baseline:baselineIntro,drills:drills,drill:startDrill,card:card,result:baselineResult})[v](arg);}
+
+/* ---------------- question renderer ---------------- */
+function renderQ(opts){
+  /* opts: it, idx, total, ans, conf, reveal, onAnswer, onConf, label */
+  var it=opts.it, ans=opts.ans, reveal=opts.reveal;
+  var h='<div class="q panel">';
+  h+='<div class="qhead"><span class="qno">'+esc(opts.label)+'</span><span class="tag">'+esc(SHORT[it.domain]||it.domain)+'</span>'+
+     (it.type==="multi"?'<span class="tag">select '+need(it)+'</span>':'')+(it.type==="match"?'<span class="tag">matching</span>':'')+'</div>';
+  h+='<div class="prog"><i style="width:'+Math.round((opts.idx+1)/opts.total*100)+'%"></i></div>';
+  h+='<p class="stem">'+esc(it.stem)+'</p>';
+  if(it.type==="match"){
+    h+='<div class="match">'+it.prompts.map(function(p){
+      var cur=(ans||{})[p.id]||"", cls="";
+      if(reveal){cls=cur===it.correct[p.id]?" good":" bad"}
+      return '<div class="mrow'+cls+'"><div>'+esc(p.text)+'</div><select data-p="'+p.id+'" aria-label="Pattern"'+(reveal?" disabled":"")+'>'+
+        '<option value="">Choose…</option>'+it.choices.map(function(c){return '<option'+(cur===c?" selected":"")+'>'+esc(c)+'</option>'}).join("")+'</select>'+
+        (reveal&&cur!==it.correct[p.id]?'<div class="want">Key: '+esc(it.correct[p.id])+'</div>':'')+'</div>';
+    }).join("")+'</div>';
+  } else {
+    var order=opts.order||it.options.map(function(o){return o.key});
+    h+='<div class="opts">'+order.map(function(k,n){
+      var o=it.options.filter(function(x){return x.key===k})[0];
+      var on=(ans||[]).indexOf(k)>-1, cls="";
+      if(reveal){ if(it.correct.indexOf(k)>-1) cls=" good"; else if(on) cls=" bad"; }
+      return '<button type="button" class="opt'+cls+'" data-k="'+k+'" aria-pressed="'+on+'"'+(reveal?" disabled":"")+'>'+
+        '<span class="box'+(it.type==="multi"?"":" round")+'">'+(on?"✓":"")+'</span><span class="k">'+"ABCDE"[n]+'</span><span>'+esc(o.text)+'</span></button>';
+    }).join("")+'</div>';
+  }
+  if(opts.onConf){
+    h+='<div class="conf"><span>How sure are you?</span>'+
+      '<button type="button" data-c="sure" aria-pressed="'+(opts.conf==="sure")+'">Sure</button>'+
+      '<button type="button" data-c="guess" aria-pressed="'+(opts.conf==="guess")+'">Guessing</button></div>';
+  }
+  if(reveal){
+    var ok=isRight(it,ans), order2=opts.order||it.options&&it.options.map(function(o){return o.key});
+    var letter=function(k){return order2?"ABCDE"[order2.indexOf(k)]:k};
+    h+='<div class="why"><p class="verdict '+(ok?"ok":"no")+'">'+(ok?"Correct.":"Not this time.")+'</p><p>'+esc(it.rationale)+'</p>';
+    if(it.distractors&&Object.keys(it.distractors).length){
+      h+='<ul>'+Object.keys(it.distractors).sort(function(a,b){return letter(a)<letter(b)?-1:1}).map(function(k){
+        return '<li><b>'+letter(k)+'.</b> '+esc(it.distractors[k])+'</li>'}).join("")+'</ul>';
+    }
+    h+=srcHTML(it)+'</div>';
+  }
+  h+='</div>';
+  return h;
+}
+function wireQ(root,it,getAns,setAns,onConf){
+  if(it.type==="match"){
+    Array.prototype.forEach.call(root.querySelectorAll("select[data-p]"),function(s){
+      s.onchange=function(){var a=Object.assign({},getAns()||{});a[s.getAttribute("data-p")]=s.value;setAns(a)};});
+  } else {
+    Array.prototype.forEach.call(root.querySelectorAll(".opt[data-k]"),function(b){
+      b.onclick=function(){var k=b.getAttribute("data-k"),a=(getAns()||[]).slice();
+        if(it.type==="multi"){var i=a.indexOf(k);if(i>-1)a.splice(i,1);else{if(a.length>=need(it))a.shift();a.push(k)}}
+        else a=[k];
+        setAns(a);};});
+  }
+  if(onConf) Array.prototype.forEach.call(root.querySelectorAll("[data-c]"),function(b){b.onclick=function(){onConf(b.getAttribute("data-c"))}});
+}
+
+/* ---------------- home ---------------- */
+function home(){
+  setNav("home");
+  var base=get("baseline",null);
+  app.innerHTML=
+  '<section class="stack"><div class="eyebrow">Claude Certified Architect · Professional</div>'+
+  '<h1>Find your gaps first, then drill only those.</h1>'+
+  '<p class="lede">A 21-question baseline tells you which of the seven exam domains are weak. The domain drills then take you through 103 practice questions with an explanation for every option. The exam card is the one page to read on the morning of the exam.</p></section>'+
+  '<div class="steps">'+
+    '<div class="step"><span class="n">Step 1</span><h3>Take the baseline</h3><p>21 questions, 3 per domain, about 40 minutes. Mark each answer sure or guessing. Honesty here is what makes the gap map useful.</p><div><button class="btn primary" data-go="baseline">'+(base?"Retake baseline":"Start baseline")+'</button></div></div>'+
+    '<div class="step"><span class="n">Step 2</span><h3>Drill your weakest domains</h3><p>Work in the order the gap map gives you. It weights each weakness by how much of the exam that domain carries.</p><div><button class="btn" data-go="drills">Open drills</button></div></div>'+
+    '<div class="step"><span class="n">Step 3</span><h3>Read the exam card</h3><p>The five checks and eight rules that decide most scenario questions. Read it twice on exam morning, then close it.</p><div><button class="btn" data-go="card">Open card</button></div></div>'+
+  '</div>'+
+  (base?'<div class="panel row" style="justify-content:space-between"><span>Your last baseline: <b>'+base.correct+' / '+base.total+'</b> on '+new Date(base.at).toLocaleDateString(undefined,{day:"numeric",month:"short"})+'.</span><button class="btn" data-go="result">View gap map</button></div>':'')+
+  '<section class="panel stack"><h2>The exam at a glance</h2>'+
+  '<div class="facts"><div class="fact"><b>63</b><span>questions</span></div><div class="fact"><b>120</b><span>minutes</span></div><div class="fact"><b>720</b><span>pass mark, of 1000</span></div><div class="fact"><b>7</b><span>domains</span></div></div>'+
+  '<div class="tablewrap"><table><tr><th>Domain</th><th>Weight</th><th>Baseline</th><th>Drill bank</th></tr>'+
+  DOMS.map(function(d){return '<tr><td>'+esc(d.s)+'</td><td class="num">'+d.w+'%</td><td class="num">3</td><td class="num">'+BANK.filter(function(i){return i.domain===d.k}).length+'</td></tr>'}).join("")+
+  '</table></div>'+
+  '<p class="note">Formats on the real exam: multiple choice, multiple response (all-or-nothing), and scenario matching. Weights and format are from the CCAR-P Exam Guide v1.0. Check the current guide before you book, since details can change.</p></section>'+
+  '<section class="panel stack"><h2>How to read the explanations</h2>'+
+  '<p class="lede">Every question explains why the key is right and why each other option fails, with a source. A source marked <span style="color:var(--mid)">INFERRED</span> means no vendor document covers that point. It reflects defensible practice, not documented canon. The Stakeholder domain has no vendor documentation at all, so its keys are all inferred. Anthropic\'s prep course is the authoritative source there.</p></section>';
+  wireGo();
+}
+function wireGo(){Array.prototype.forEach.call(app.querySelectorAll("[data-go]"),function(b){b.onclick=function(){go(b.getAttribute("data-go"))}})}
+
+/* ---------------- baseline ---------------- */
+var B=null;
+function baselineIntro(){
+  setNav("baseline");
+  app.innerHTML='<section class="stack"><div class="eyebrow">Step 1 · Baseline</div><h1>Twenty-one questions to map your gaps.</h1>'+
+  '<p class="lede">Three questions from each domain, shuffled. There is no clock and no feedback until the end, so your answers reflect what you know rather than what the last explanation taught you.</p></section>'+
+  '<div class="panel stack"><h2>Before you start</h2><ul style="margin:0;padding-left:20px;display:grid;gap:6px">'+
+  '<li><b>Mark every answer sure or guessing.</b> A wrong answer you were sure about is a blind spot, and it outranks everything else.</li>'+
+  '<li><b>Multiple-response questions are all-or-nothing</b>, as on the real exam.</li>'+
+  '<li><b>Read every option in full</b> before ruling one out. The deciding words are often at the end.</li></ul>'+
+  '<div><button class="btn primary" id="bStart">Start the baseline</button></div></div>';
+  document.getElementById("bStart").onclick=function(){
+    B={items:shuffle(BASE),idx:0,ans:{},conf:{},order:{}};
+    B.items.forEach(function(it){if(it.type!=="match")B.order[it.id]=shuffle(it.options.map(function(o){return o.key}))});
+    baselineQ();
+  };
+}
+function baselineQ(){
+  var it=B.items[B.idx];
+  app.innerHTML=renderQ({it:it,idx:B.idx,total:B.items.length,ans:B.ans[it.id],conf:B.conf[it.id],order:B.order[it.id],reveal:false,onConf:true,label:"Question "+(B.idx+1)+" of "+B.items.length})+
+  '<div class="row" style="justify-content:space-between"><button class="btn" id="prev"'+(B.idx?"":" disabled")+'>Back</button>'+
+  '<span style="font-size:13px;color:var(--faint)" id="hint"></span>'+
+  '<button class="btn primary" id="next">'+(B.idx===B.items.length-1?"See my gap map":"Next")+'</button></div>';
+  var root=app.querySelector(".q");
+  wireQ(root,it,function(){return B.ans[it.id]},function(a){B.ans[it.id]=a;baselineQ()},function(c){B.conf[it.id]=c;baselineQ()});
+  var ok=answered(it,B.ans[it.id])&&B.conf[it.id];
+  var nx=document.getElementById("next");
+  nx.disabled=!ok;
+  document.getElementById("hint").textContent=ok?"":(answered(it,B.ans[it.id])?"Mark sure or guessing to continue":(it.type==="multi"?"Select "+need(it)+" options":"Choose an answer"));
+  nx.onclick=function(){if(B.idx<B.items.length-1){B.idx++;baselineQ()}else finishBaseline()};
+  document.getElementById("prev").onclick=function(){if(B.idx){B.idx--;baselineQ()}};
+}
+function finishBaseline(){
+  var per={};DOMS.forEach(function(d){per[d.k]={right:0,total:0,blind:0,lucky:0}});
+  var items=[];
+  B.items.forEach(function(it){var r=isRight(it,B.ans[it.id]),c=B.conf[it.id],p=per[it.domain];
+    p.total++; if(r)p.right++; if(!r&&c==="sure")p.blind++; if(r&&c==="guess")p.lucky++;
+    items.push({id:it.id,ok:r,conf:c,ans:B.ans[it.id]});});
+  var correct=items.filter(function(x){return x.ok}).length;
+  var rec={at:Date.now(),correct:correct,total:B.items.length,per:per,items:items};
+  put("baseline",rec);
+  B.done=rec; baselineResult();
+}
+function bandOf(p){
+  if(p.right===p.total&&p.lucky===0) return {c:"strong",t:"Strong"};
+  if(p.right>=p.total-1) return {c:"mid",t:"Borderline"};
+  return {c:"weak",t:"Weak"};
+}
+function priority(p,w){return ((p.total-p.right)+0.5*p.blind+0.5*p.lucky)*w}
+function baselineResult(){
+  setNav("baseline");window.scrollTo(0,0);
+  var rec=get("baseline",null)||(B&&B.done);
+  if(!rec){baselineIntro();return}
+  var rows=DOMS.map(function(d){var p=rec.per[d.k]||{right:0,total:0,blind:0,lucky:0};return {d:d,p:p,b:bandOf(p),pri:priority(p,d.w)}});
+  var ranked=rows.slice().sort(function(a,b){return b.pri-a.pri});
+  var blind=rows.reduce(function(s,r){return s+r.p.blind},0);
+  app.innerHTML='<section class="stack"><div class="eyebrow">Your gap map</div>'+
+  '<h1>'+rec.correct+' of '+rec.total+' correct.</h1>'+
+  '<p class="lede">'+(blind?'<b>'+blind+' blind spot'+(blind>1?'s':'')+'</b>, meaning wrong while sure. Those are the mistakes you would make at full conviction on exam day, so they count for more in the drill order below. ':'No blind spots: nothing wrong while you were sure. ')+
+  'With 3 questions per domain this is a direction, not a verdict. Use it to decide where to start.</p></section>'+
+  '<div class="panel stack"><h2>By domain</h2><div class="tablewrap"><table><tr><th>Domain</th><th>Weight</th><th>Score</th><th>Blind spots</th><th>Band</th></tr>'+
+  rows.map(function(r){return '<tr><td>'+esc(r.d.s)+'</td><td class="num">'+r.d.w+'%</td><td class="num">'+r.p.right+' / '+r.p.total+'</td><td class="num">'+(r.p.blind||"–")+'</td><td><span class="band '+r.b.c+'">'+r.b.t+'</span></td></tr>'}).join("")+
+  '</table></div><p class="note">Strong: all correct and all sure. Borderline: one miss, or a correct guess. Weak: two or more misses.</p></div>'+
+  '<div class="panel stack"><h2>Your drill order</h2><p class="lede">Ranked by gap multiplied by exam weight, so a borderline domain worth 19% can outrank a weak one worth 7%.</p>'+
+  '<div class="domgrid">'+ranked.map(function(r,n){
+    var cnt=BANK.filter(function(i){return i.domain===r.d.k}).length;
+    return '<button class="dom" data-d="'+esc(r.d.k)+'"><span><b>'+(n+1)+'. '+esc(r.d.s)+'</b></span><span class="band '+r.b.c+'">'+r.b.t+'</span>'+
+      '<span class="meta"><span>'+r.d.w+'% of exam</span><span>'+cnt+' drill questions</span><span class="go">Start drill →</span></span></button>'}).join("")+
+  '</div></div>'+
+  '<div class="row"><button class="btn" id="review">Review baseline answers</button><button class="btn" data-go="baseline">Retake baseline</button></div>'+
+  '<div id="rev"></div>';
+  Array.prototype.forEach.call(app.querySelectorAll(".dom"),function(b){b.onclick=function(){go("drill",b.getAttribute("data-d"))}});
+  wireGo();
+  document.getElementById("review").onclick=function(){
+    var byId={};BASE.forEach(function(i){byId[i.id]=i});
+    document.getElementById("rev").innerHTML='<div class="stack">'+rec.items.map(function(x,n){
+      var it=byId[x.id]; if(!it) return "";
+      return renderQ({it:it,idx:n,total:rec.items.length,ans:x.ans,reveal:true,label:"Q"+(n+1)+" · "+(x.ok?"correct":"missed")+(x.conf?" · "+x.conf:"")});
+    }).join("")+'</div>';
+    document.getElementById("review").disabled=true;
+  };
+}
+
+/* ---------------- drills ---------------- */
+function drills(){
+  setNav("drills");
+  var prog=get("drills",{}), base=get("baseline",null);
+  var list=DOMS.slice();
+  if(base) list.sort(function(a,b){return priority(base.per[b.k]||{right:0,total:0,blind:0,lucky:0},b.w)-priority(base.per[a.k]||{right:0,total:0,blind:0,lucky:0},a.w)});
+  app.innerHTML='<section class="stack"><div class="eyebrow">Step 2 · Domain drills</div><h1>One domain at a time, explained as you go.</h1>'+
+  '<p class="lede">'+(base?'Ordered by your baseline gap map, weakest-by-weight first.':'Take the baseline first to get these ordered by your own gaps. Until then they are listed by exam weight.')+' Each answer is marked immediately, with why the key is right and why every other option fails.</p></section>'+
+  '<div class="domgrid">'+list.map(function(d){
+    var cnt=BANK.filter(function(i){return i.domain===d.k}).length, p=prog[d.k], pct=p?Math.round(p.right/p.done*100):null;
+    var b=base&&base.per[d.k]?bandOf(base.per[d.k]):null;
+    var col=pct===null?"var(--line-strong)":pct>=80?"var(--strong)":pct>=60?"var(--mid)":"var(--weak)";
+    return '<button class="dom" data-d="'+esc(d.k)+'"><span><b>'+esc(d.s)+'</b></span>'+(b?'<span class="band '+b.c+'">'+b.t+'</span>':'<span class="tag">'+d.w+'%</span>')+
+      '<span class="bar"><i style="width:'+(pct===null?0:pct)+'%;background:'+col+'"></i></span>'+
+      '<span class="meta"><span>'+d.w+'% of exam</span><span>'+cnt+' questions</span><span>'+(p?'Last drill: '+p.right+' / '+p.done+' ('+pct+'%)':'Not drilled yet')+'</span><span class="go">Start →</span></span></button>';
+  }).join("")+'</div>'+
+  '<p class="note">Aim for 80% or better in every domain before sitting the exam, and treat anything under 60% as a study target whatever your overall score.</p>';
+  Array.prototype.forEach.call(app.querySelectorAll(".dom"),function(b){b.onclick=function(){go("drill",b.getAttribute("data-d"))}});
+}
+var D=null;
+function startDrill(dom){
+  D={dom:dom,items:shuffle(BANK.filter(function(i){return i.domain===dom})),idx:0,ans:{},shown:{},right:0,order:{}};
+  D.items.forEach(function(it){if(it.type!=="match")D.order[it.id]=shuffle(it.options.map(function(o){return o.key}))});
+  drillQ();
+}
+function drillQ(){
+  var it=D.items[D.idx], shown=!!D.shown[it.id];
+  app.innerHTML='<div class="row" style="justify-content:space-between"><div class="eyebrow">Drill · '+esc(SHORT[D.dom])+'</div><button class="btn" id="quit">End drill</button></div>'+
+  renderQ({it:it,idx:D.idx,total:D.items.length,ans:D.ans[it.id],order:D.order[it.id],reveal:shown,label:"Question "+(D.idx+1)+" of "+D.items.length})+
+  '<div class="row" style="justify-content:space-between"><span style="font-size:13px;color:var(--faint)">Score so far: '+D.right+' / '+Object.keys(D.shown).length+'</span>'+
+  (shown?'<button class="btn primary" id="nx">'+(D.idx===D.items.length-1?"Finish":"Next question")+'</button>':'<button class="btn primary" id="chk">Check answer</button>')+'</div>';
+  var root=app.querySelector(".q");
+  if(!shown) wireQ(root,it,function(){return D.ans[it.id]},function(a){D.ans[it.id]=a;drillQ()});
+  var chk=document.getElementById("chk");
+  if(chk){chk.disabled=!answered(it,D.ans[it.id]);chk.onclick=function(){D.shown[it.id]=true;if(isRight(it,D.ans[it.id]))D.right++;drillQ();
+    var w=app.querySelector(".why");if(w&&w.scrollIntoView)w.scrollIntoView({block:"nearest"});}}
+  var nx=document.getElementById("nx");
+  if(nx) nx.onclick=function(){if(D.idx<D.items.length-1){D.idx++;drillQ();window.scrollTo(0,0)}else endDrill()};
+  document.getElementById("quit").onclick=endDrill;
+}
+function endDrill(){
+  var done=Object.keys(D.shown).length;
+  if(done){var prog=get("drills",{});prog[D.dom]={right:D.right,done:done,at:Date.now()};put("drills",prog);}
+  var pct=done?Math.round(D.right/done*100):0;
+  app.innerHTML='<section class="stack"><div class="eyebrow">Drill complete · '+esc(SHORT[D.dom])+'</div><h1>'+D.right+' of '+done+' correct.</h1>'+
+  '<p class="lede">'+(done===0?'No questions checked.':pct>=80?'Solid. Move to your next domain and come back to this one later to confirm it holds.':pct>=60?'Borderline. Reread the explanations for the ones you missed, then drill this domain again tomorrow.':'This is a study target. Go through each missed explanation and its source before drilling again.')+'</p></section>'+
+  '<div class="row"><button class="btn primary" data-go="drills">Back to domains</button><button class="btn" id="again">Drill this domain again</button></div>';
+  wireGo();
+  document.getElementById("again").onclick=function(){startDrill(D.dom)};
+}
+
+/* ---------------- exam card ---------------- */
+function card(){
+  setNav("card");
+  function rule(b,s){return '<div class="rule"><b>'+b+'</b><span>'+s+'</span></div>'}
+  app.innerHTML='<section class="stack"><div class="eyebrow">Step 3 · Exam card</div><h1>The one page for exam morning.</h1>'+
+  '<p class="lede">Read it twice, then close it. Every rule here decided at least one practice question.</p></section>'+
+  '<div class="panel card-sec"><h2>Before each answer: five checks</h2><ol>'+
+  '<li><b>Full read.</b> Translate each option into about five plain words. Don\'t rule one out until you can point to the words that make it wrong. The deciding qualifier is usually at the end.</li>'+
+  '<li><b>Stem verb.</b> "Objection" or "challenge" means say why it\'s wrong. "Recommend" or "should" means say what to do.</li>'+
+  '<li><b>Category.</b> Does the option fit the list the stem names, and does it change the choice? A true statement on the wrong list is still wrong.</li>'+
+  '<li><b>Contradiction.</b> Can both of your picks be true at once? If they\'re opposites, one is wrong.</li>'+
+  '<li><b>Count.</b> "Select two" means exactly two. On yes or no statements, judge every option on its own.</li></ol></div>'+
+  '<div class="panel card-sec"><h2>Eight rules</h2>'+
+  rule("Must-not-happen means code, permission or approval.","Strength order: code and approvals, then filters and classifiers, then prompt instructions. An instruction is never the answer to a hard requirement.")+
+  rule("Route human review by impact, not confidence.","A model can be confident and wrong. Ask what happens if this output is wrong.")+
+  rule("A control has to act.","Logging, alerting and dashboards are monitoring. Enforcement blocks, gates or rejects, and records that it did.")+
+  rule("Your own measured numbers beat vendor or public scores.","Agreed bar over benchmark rank. An evaluation on your workload over the vendor\'s suite.")+
+  rule("Documents go through retrieval, live state through a tool call.","Order status, balances, stock and ticket status are read at request time. Re-indexing faster never closes the gap.")+
+  rule("Never escalate a fix that already failed.","If the team already raised the timeout or added retries and it got worse, doing more of it is wrong. Resilience is a limit plus a fail-fast detect.")+
+  rule("Prefer the change that makes the failure impossible.","Gate the tool rather than filter the attack. Fix the ranking rather than widen the window. Enforce the schema rather than repair the output.")+
+  rule("Use the simplest thing that meets the bar.","Augmented LLM, then workflow, then agent, then multi-agent. Don\'t build for hypothetical needs.")+
+  '</div>'+
+  '<div class="panel card-sec"><h2>Pattern tells</h2><p class="lede">Could you draw the whole flowchart before it runs? If yes, it\'s a workflow. If no, it\'s an agent.</p><div class="tablewrap"><table>'+
+  [["Augmented LLM","One call with retrieval or tools."],["Prompt chaining","Fixed steps, each runs once, each feeds the next."],["Routing","Distinct, stable categories, one per input."],["Parallelization","A fixed, known set of independent subtasks, merged afterwards."],["Orchestrator-workers","The subtasks can\'t be listed until the input has been examined."],["Evaluator-optimizer","The word \"until\": scored against criteria, revised, rescored."],["Agent","Unknown path, needs environment feedback. Needs a stopping condition and guardrails."]]
+  .map(function(r){return '<tr><td style="font-weight:600;white-space:nowrap">'+r[0]+'</td><td>'+r[1]+'</td></tr>'}).join("")+'</table></div></div>'+
+  '<div class="panel card-sec"><h2>Layers and scopes</h2><ul>'+
+  '<li><b>Who may call it, what gets logged, what data goes in:</b> the application layer, in code, before the prompt is assembled.</li>'+
+  '<li><b>What the output says and how it\'s formatted:</b> the Skill, the system prompt and the examples.</li>'+
+  '<li><b>A vendor\'s promise covers the vendor only.</b> Your own stores need your own control, owner and evidence.</li>'+
+  '<li><b>Propagate the user\'s identity</b> to source systems. Never use a shared service account.</li>'+
+  '<li><b>Claude Code precedence:</b> managed, CLI args, local, project, user. Managed means enforced. Project means shared through git. Local means just me, in this repo. User means just me, in every repo.</li>'+
+  '<li><b>Hooks and permission rules enforce. CLAUDE.md guides.</b></li></ul></div>'+
+  '<div class="panel card-sec"><h2>Evaluation</h2><ul>'+
+  '<li><b>The fault sits in the layer whose signal moved.</b> Layers whose signals held are cleared.</li>'+
+  '<li><b>Pre-register</b> the measure, the decision rule, the sample and the stopping rule. Adding a measure mid-run is cherry-picking.</li>'+
+  '<li><b>Never quote a score from the set you tuned or selected on.</b> Small sets mean wide margins. Cover every intent you claim.</li>'+
+  '<li><b>pass@k means "can it"; pass^k means "will it, every time".</b> Unattended work needs the second.</li>'+
+  '<li><b>Calibrate a judge against human labels</b> before it gates a release.</li></ul></div>'+
+  '<div class="panel card-sec"><h2>Stakeholders</h2><div class="tablewrap"><table>'+
+  [["Executive sponsor","Outcomes, trade-offs, high-level risks"],["CFO","Cost, ROI, payback"],["General counsel","Liability, confidentiality, human accountability"],["CIO","Integration, operations, lock-in"],["CISO","Threat model, controls, residual risk"],["Product","Capabilities, scope, roadmap"],["Engineering","Alternatives, components, implementation"]]
+  .map(function(r){return '<tr><td style="font-weight:600;white-space:nowrap">'+r[0]+'</td><td>'+r[1]+'</td></tr>'}).join("")+'</table></div><ul>'+
+  '<li><b>Committee:</b> the decision first, then a section per stakeholder.</li>'+
+  '<li><b>Handover:</b> the client does the work and owns the controls.</li>'+
+  '<li><b>Discovery:</b> constraints, then success criteria, then scope, then design.</li>'+
+  '<li><b>Bad news:</b> the measured number against the commitment, with a plan. Never soften the bar.</li></ul></div>'+
+  '<div class="panel card-sec"><h2>Prompting and models</h2><ul>'+
+  '<li><b>Correct instruction but inconsistent output:</b> add a few examples. Not a pipeline, not a bigger model.</li>'+
+  '<li><b>Caching:</b> static content first and byte-identical; variable content last.</li>'+
+  '<li><b>Long context:</b> documents at the top, the question at the end, quotes extracted first.</li>'+
+  '<li><b>XML tags</b> separate instructions, documents and examples.</li>'+
+  '<li><b>Leading questions get agreement.</b> Ask for a neutral comparison against named criteria.</li>'+
+  '<li><b>Absolute wording</b> (always, never, regardless, guaranteed) in a claim about how something behaves: rule it out.</li></ul></div>'+
+  '<div class="panel card-sec"><h2>Pace</h2><div class="facts"><div class="fact"><b>1.9 min</b><span>per question</span></div><div class="fact"><b>Q32</b><span>about 60 min left</span></div><div class="fact"><b>Q48</b><span>about 30 min left</span></div></div>'+
+  '<ul><li>Flag real doubt and move on. Come back at the end.</li><li>Being ahead of the clock is permission to read fully, not a reason to speed up. Rushing costs more marks than any single knowledge gap.</li><li>When your own practice and the documented answer disagree, choose the documented one.</li></ul></div>';
+}
+
+home();
+})();
+</script>
+
+</body>
+</html>

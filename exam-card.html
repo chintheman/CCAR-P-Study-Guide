@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CCAR-P Exam Card</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap">
+<style>
+:root{
+  --paper:#F6F5F2; --surface:#FFFFFF; --sunk:#EFEEE9;
+  --ink:#16191C; --muted:#4C5157; --faint:#7C838B;
+  --line:#E2E0DA; --line-strong:#C9C6BE;
+  --accent:#3F5C8C; --accent-soft:#E7ECF5;
+  --warn:#9A6B15; --warn-soft:#F6EEDC;
+  --stop:#9C3A32; --stop-soft:#F7E6E3;
+  --go:#2F6B4F; --go-soft:#E3F0E8;
+  --sans:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+  --serif:"Source Serif 4",Georgia,serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#111315; --surface:#181B1E; --sunk:#1F2327;
+    --ink:#ECEAE5; --muted:#B3B8BE; --faint:#868D95;
+    --line:#2A2F34; --line-strong:#3C434A;
+    --accent:#8FADD9; --accent-soft:#1B2534;
+    --warn:#D9A84B; --warn-soft:#2A2213;
+    --stop:#E08A80; --stop-soft:#2C1B18;
+    --go:#7FC49C; --go-soft:#14251C;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#111315; --surface:#181B1E; --sunk:#1F2327;
+  --ink:#ECEAE5; --muted:#B3B8BE; --faint:#868D95;
+  --line:#2A2F34; --line-strong:#3C434A;
+  --accent:#8FADD9; --accent-soft:#1B2534;
+  --warn:#D9A84B; --warn-soft:#2A2213;
+  --stop:#E08A80; --stop-soft:#2C1B18;
+  --go:#7FC49C; --go-soft:#14251C;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-text-size-adjust:100%}
+.wrap{max-width:760px;margin:0 auto;padding-inline:16px;padding-block:28px 72px;display:grid;gap:22px}
+header{display:grid;gap:8px;border-bottom:2px solid var(--line-strong);padding-bottom:16px}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--serif);font-size:30px;line-height:1.15;margin:0;text-wrap:balance}
+.lede{color:var(--muted);font-size:15px;margin:0}
+section{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 16px 18px}
+h2{font-family:var(--serif);font-size:20px;margin:0 0 4px;text-wrap:balance}
+.sub{color:var(--faint);font-size:13px;margin:0 0 12px}
+ol,ul{margin:0;padding-left:20px;display:grid;gap:7px}
+li{padding-left:2px}
+b,strong{font-weight:600}
+.rule{display:grid;gap:3px;border-left:3px solid var(--accent);background:var(--accent-soft);padding:10px 12px;border-radius:0 7px 7px 0}
+.rule .r{font-weight:600}
+.rule .e{font-size:14px;color:var(--muted)}
+.stack{display:grid;gap:10px}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{text-align:left;padding:8px 8px 8px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:500}
+td.k{font-weight:600;white-space:nowrap;padding-right:14px}
+.tablewrap{overflow-x:auto}
+.ladder{counter-reset:step;display:grid;gap:8px;padding:0;margin:0;list-style:none}
+.ladder li{display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:start}
+.ladder .n{font-family:var(--mono);font-size:12px;color:var(--faint);border:1px solid var(--line-strong);border-radius:4px;text-align:center;padding:1px 0;margin-top:2px}
+.pace{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px}
+.pill{background:var(--sunk);border:1px solid var(--line);border-radius:8px;padding:10px 12px;display:grid;gap:2px}
+.pill b{font-family:var(--mono);font-size:19px}
+.pill span{font-size:12.5px;color:var(--faint)}
+.no{color:var(--stop);font-weight:600}
+.yes{color:var(--go);font-weight:600}
+.flag{background:var(--warn-soft);border:1px solid var(--line);border-left:3px solid var(--warn);border-radius:0 7px 7px 0;padding:10px 12px;font-size:14.5px}
+footer{color:var(--faint);font-size:12.5px;text-align:center;padding-top:4px}
+@media print{body{background:#fff}section{break-inside:avoid;border-color:#ccc}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Claude Certified Architect · Professional</div>
+  <h1>Exam day card</h1>
+  <p class="lede">63 items, 120 minutes, 720 to pass. Read this twice in the morning, then close it.</p>
+</header>
+
+<section>
+  <h2>Before each answer</h2>
+  <p class="sub">The five checks. Check 0 is the one that cost the most marks this week.</p>
+  <ol class="ladder">
+    <li><span class="n">0</span><span><b>Full read.</b> Translate each option into about five plain words. You may not eliminate one until you can point to the words that make it wrong. The deciding qualifier is usually at the end of the option.</span></li>
+    <li><span class="n">1</span><span><b>Stem verb.</b> Objection or challenge means say why it is wrong. Recommend or should means say what to do. Belongs on the list means match the category.</span></li>
+    <li><span class="n">2</span><span><b>Category.</b> Does this option fit the list the stem names, and does it change the choice? A true statement on the wrong list is still wrong.</span></li>
+    <li><span class="n">3</span><span><b>Contradiction.</b> Can both of my picks be true at the same time? Opposites mean one is wrong.</span></li>
+    <li><span class="n">4</span><span><b>Count.</b> Select two means exactly two. On yes/no statements, judge every option on its own.</span></li>
+  </ol>
+</section>
+
+<section>
+  <h2>The eight rules</h2>
+  <div class="stack">
+    <div class="rule"><span class="r">Must not happen means code, permission or approval.</span><span class="e">Strength order: code and approvals, then filters and classifiers, then prompt instructions. An instruction is the weakest control, never the answer to a hard requirement.</span></div>
+    <div class="rule"><span class="r">Route human review by impact, not by confidence.</span><span class="e">A model can be 0.97 confident and wrong. Ask what happens if this output is wrong.</span></div>
+    <div class="rule"><span class="r">A control has to act.</span><span class="e">Logging, alerting and dashboards are monitoring. Enforcement blocks, gates or rejects, and records that it did.</span></div>
+    <div class="rule"><span class="r">Your own measured numbers beat any vendor or public score.</span><span class="e">Agreed bar over benchmark rank. Eval on your workload over the vendor's suite. A business case uses measures you can recompute.</span></div>
+    <div class="rule"><span class="r">Documents go through retrieval. Live state goes through a tool call.</span><span class="e">Order status, balances, stock and ticket status are read at request time. Re-indexing faster never closes the gap.</span></div>
+    <div class="rule"><span class="r">Never escalate a fix that already failed.</span><span class="e">If the stem says they raised the timeout or added retries and it got worse, any option doing more of it is wrong. Resilience is a limit plus a fail-fast detect.</span></div>
+    <div class="rule"><span class="r">Prefer the change that makes the failure impossible.</span><span class="e">Gate the tool rather than filter the attack. Fix the ranking rather than widen the window. Enforce the schema rather than repair the output.</span></div>
+    <div class="rule"><span class="r">Simplest thing that meets the bar.</span><span class="e">Augmented LLM, then workflow, then agent, then multi-agent. Multi-agent costs roughly 15x the tokens. Do not build for hypothetical future needs.</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Pattern tells</h2>
+  <p class="sub">Can you draw the whole flowchart before it runs? Yes means workflow. No means agent.</p>
+  <div class="tablewrap">
+  <table>
+    <tr><th>Pattern</th><th>The tell in the stem</th></tr>
+    <tr><td class="k">Augmented LLM</td><td>One call with retrieval or tools. Fixed corpus, citations, cost and latency matter.</td></tr>
+    <tr><td class="k">Prompt chaining</td><td>Fixed steps, each runs once, output of one feeds the next.</td></tr>
+    <tr><td class="k">Routing</td><td>Distinct, stable categories, each handled differently. One category per input.</td></tr>
+    <tr><td class="k">Parallelization</td><td>A fixed, known set of independent subtasks, merged afterwards.</td></tr>
+    <tr><td class="k">Orchestrator-workers</td><td>The subtasks cannot be listed until the input has been examined.</td></tr>
+    <tr><td class="k">Evaluator-optimizer</td><td>The word "until": scored against criteria, revised, rescored.</td></tr>
+    <tr><td class="k">Agent</td><td>Unknown path, environment feedback, unknown number of steps. Needs a stopping condition and guardrails.</td></tr>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>Layers and boundaries</h2>
+  <div class="tablewrap">
+  <table>
+    <tr><th>Question</th><th>Answer</th></tr>
+    <tr><td class="k">Who may call it, what is logged, what data goes in</td><td>Application layer, in code, before the prompt is assembled</td></tr>
+    <tr><td class="k">What the output says, its format and tone</td><td>Skill, system prompt, examples</td></tr>
+    <tr><td class="k">A vendor's promise</td><td>Covers the vendor only. Your own stores need your control, owner and evidence</td></tr>
+    <tr><td class="k">Who the source system thinks is asking</td><td>Propagate the user's identity. Never a shared service account</td></tr>
+  </table>
+  </div>
+  <p class="sub" style="margin-top:12px">Claude Code scopes. Precedence: managed, CLI args, local, project, user.</p>
+  <div class="tablewrap">
+  <table>
+    <tr><th>Scope</th><th>Reach</th><th>Use for</th></tr>
+    <tr><td class="k">Managed</td><td>Whole org, cannot be overridden</td><td>Security rules that must hold</td></tr>
+    <tr><td class="k">Project</td><td>Everyone who clones the repo, via git</td><td>Shared team setup: MCP servers, hooks, permissions</td></tr>
+    <tr><td class="k">Local</td><td>Me, this repo only</td><td>Personal tweaks, not committed</td></tr>
+    <tr><td class="k">User</td><td>Me, every repo</td><td>Personal defaults</td></tr>
+  </table>
+  </div>
+  <p class="sub" style="margin-top:10px">Shared next to user scope is always a mismatch. Hooks enforce; CLAUDE.md guides.</p>
+</section>
+
+<section>
+  <h2>Evaluation</h2>
+  <ul>
+    <li><b>Layer localisation.</b> The fault sits in the layer whose signal moved. Layers whose signals held are cleared. Never blame the judge that did not change, and never relax a signal to quieten it.</li>
+    <li><b>Pre-register.</b> Primary measure, decision rule, sample and assignment, stopping rule. All fixed before the run. Adding a measure mid-run is cherry-picking.</li>
+    <li><b>Held-out data.</b> Never quote a score from the set you tuned on or selected on. Small sets mean wide margins. The set must cover every intent and segment you claim for.</li>
+    <li><b>Judges are instruments.</b> Calibrate against human labels before a judge gates a release.</li>
+    <li><b>pass@k vs pass^k.</b> Best of k attempts suits a human picking. Unattended single-shot work needs per-attempt reliability.</li>
+    <li><b>Production monitoring.</b> Sampled scoring of real traffic plus behavioural proxies. A fixed offline set stays green while inputs drift.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Stakeholders</h2>
+  <div class="tablewrap">
+  <table>
+    <tr><th>Audience</th><th>Give them</th></tr>
+    <tr><td class="k">Exec sponsor</td><td>Outcomes, trade-offs, high-level risks</td></tr>
+    <tr><td class="k">CFO</td><td>Cost, ROI, payback</td></tr>
+    <tr><td class="k">General counsel</td><td>Liability, confidentiality, human accountability</td></tr>
+    <tr><td class="k">CIO</td><td>Integration, operations, lock-in</td></tr>
+    <tr><td class="k">CISO</td><td>Threat model, controls, residual risk, audit trail</td></tr>
+    <tr><td class="k">Product</td><td>Capabilities, scope, roadmap</td></tr>
+    <tr><td class="k">Engineering</td><td>Alternatives, components, implementation</td></tr>
+  </table>
+  </div>
+  <ul style="margin-top:12px">
+    <li><b>Mixed committee:</b> lead with the decision, then a section per stakeholder.</li>
+    <li><b>Handover:</b> the client does the work and owns the controls. Documents and retained consultants are not capability.</li>
+    <li><b>Discovery order:</b> constraints, then success criteria, then scope, then design.</li>
+    <li><b>Bad news:</b> report the measured number against the commitment, with the shortfall and a plan. Never soften the bar to protect a date.</li>
+    <li><b>Incidents:</b> prompt, in business terms, with impact, cause as known, fix, remediation and prevention.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Prompting and models</h2>
+  <ul>
+    <li><b>Correct instruction, inconsistent output</b> means few-shot examples. Never a pipeline, never a bigger model.</li>
+    <li><b>Prompt caching:</b> static content first, byte-identical across requests. Variable content last.</li>
+    <li><b>Long context:</b> documents at the top, question at the end, quotes extracted first.</li>
+    <li><b>XML tags</b> separate instructions, documents and examples.</li>
+    <li><b>Extended thinking</b> for multi-step reasoning where latency is tolerable. Not for high-volume classification or extraction.</li>
+    <li><b>Leading questions</b> get agreement. Ask for an even-handed comparison against stated criteria.</li>
+    <li><b>Model choice</b> comes from your eval on your workload, plus cost and latency fit. Not from newest or most capable.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Pace and conduct</h2>
+  <div class="pace">
+    <div class="pill"><b>1.9 min</b><span>per item</span></div>
+    <div class="pill"><b>Item 32</b><span>about 60 min left</span></div>
+    <div class="pill"><b>Item 48</b><span>about 30 min left</span></div>
+    <div class="pill"><b>Last 10</b><span>revisit flagged only</span></div>
+  </div>
+  <ul style="margin-top:14px">
+    <li>Flag genuine doubt and move. Do not burn four minutes on one item.</li>
+    <li>Rushing costs more marks than any single knowledge gap. Being ahead of the clock is not a reason to speed up, it is permission to read fully.</li>
+    <li>When two options both look right, pick the one that removes the failure rather than softening it.</li>
+    <li>When your own practice and the documented answer disagree, answer the documented one. The exam scores the vendor's position.</li>
+  </ul>
+  <div class="flag" style="margin-top:14px"><b>Absolute language</b> such as always, never, regardless, guaranteed, on a claim about how a mechanism behaves: eliminate it.</div>
+</section>
+
+<section>
+  <h2>Logistics</h2>
+  <ul>
+    <li>ID ready, test centre or online check-in done early, room quiet, door shut, phone in another room.</li>
+    <li>Nothing scheduled either side of the sitting.</li>
+    <li>No new material this morning. This card twice, then close it.</li>
+  </ul>
+</section>
+
+<footer>By Chin Tuan Chuang, for the ClaudeSg community. Not affiliated with or endorsed by Anthropic.</footer>
+
+</div>
+
+</body>
+</html>
