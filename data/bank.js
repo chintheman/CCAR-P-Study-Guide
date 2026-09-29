@@ -1,4 +1,3 @@
-/* Domain drill bank: 103 items. Source of truth: bank.json */
 window.CCARP_BANK = [
  {
   "id": "D1-01",
@@ -962,7 +961,7 @@ window.CCARP_BANK = [
    },
    {
     "key": "B",
-    "text": "Route every claim through the largest model with extended thinking enabled, keeping full autonomy and accepting the higher median cycle time across all bands."
+    "text": "Route every claim through the largest model with extended thinking, keep full autonomy across all value bands, and expect it to resolve exclusion interpretation on its own."
    },
    {
     "key": "C",
@@ -1011,7 +1010,7 @@ window.CCARP_BANK = [
    },
    {
     "key": "C",
-    "text": "Retain 100 percent coverage but store only the first and last model turn of each session, discarding the intermediate tool spans and their arguments to cut storage volume."
+    "text": "Retain 100 percent coverage but store only the first and last model turn of each session, which keeps storage costs down while still capturing the request and the final outcome for every trace."
    },
    {
     "key": "D",
@@ -1290,7 +1289,7 @@ window.CCARP_BANK = [
    },
    {
     "key": "E",
-    "text": "Add a cross-encoder reranker over the candidate set so that result ordering is corrected regardless of which encoder version produced the stored vectors."
+    "text": "Add a cross-encoder reranker over the candidate set, since reordering the results should recover the lost precision without needing to fix the index itself."
    }
   ],
   "correct": [
@@ -1959,7 +1958,7 @@ window.CCARP_BANK = [
    },
    {
     "key": "D",
-    "text": "Enforce the clinician's access scope as a deterministic filter in the retrieval query so out-of-scope records are never returned as context."
+    "text": "Enforce the clinician's access scope as a deterministic filter in the retrieval query so out-of-scope records are excluded from the context."
    }
   ],
   "correct": [
@@ -4592,4 +4591,5 @@ window.CCARP_BANK = [
    }
   ]
  }
-];
+]
+;
