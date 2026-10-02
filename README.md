@@ -10,7 +10,18 @@ A free study guide for the **Claude Certified Architect – Professional (CCAR-P
 | **Domain drills** | Practice by domain. Every answer is marked immediately, with why the key is right, why each other option fails, and a source. | 103 questions |
 | **Exam card** | The five option checks and eight rules that decide most scenario questions. Read it on exam morning. | 1 page |
 
-## Use it
+## Get coached, not just quizzed
+
+The web app gives you the questions. The **CCAR-P Coach** gives you the full prep loop the questions came from: a baseline, a gap map, short guided teaching one point at a time, confidence-scored drills, a review of every miss down to its cause, recurrence tracking, and an evidence-based "ready to book" gate. It runs in your own Claude.
+
+| Option | Best for | How |
+|---|---|---|
+| **Skill** (recommended) | claude.ai, Claude Code, Cowork | Upload `dist/ccar-p-coach.zip` in the Skills section of your claude.ai settings, or copy `ccar-p-coach/` into `~/.claude/skills/`. Then say "start my CCAR-P prep". |
+| **Claude Project** | Anyone on claude.ai who prefers Projects | Follow [`project-template/README.md`](project-template/README.md): paste the instructions, upload the files, start a chat. |
+
+The coach keeps a `progress.md` file for you (misses, soft spots, scores, next block) so each session picks up where the last one ended.
+
+## Use the web app
 
 Open `index.html` in a browser, or enable GitHub Pages on this repo (Settings > Pages > Deploy from branch > `main` / root). Nothing to install, no build step, no network calls beyond Google Fonts.
 
@@ -62,6 +73,9 @@ data/baseline.json  21 baseline questions (source of truth)
 data/bank.json      103 drill questions (source of truth)
 data/*.js           The same data wrapped for the browser (regenerate after editing the JSON)
 CONTRIBUTING.md     Question schema and how to add or fix items
+ccar-p-coach/       The coaching Skill: SKILL.md, references/, items/
+project-template/   The same coach set up as a Claude Project
+dist/               ccar-p-coach.zip, ready to upload as a Skill
 ```
 
 ## Compiling into a larger guide
